@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Tiled fractal noise (small SVG data URI). feTurbulence + stitchTiles tiles seamlessly. */
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  opacity: 0.035;
+  isolation: isolate;
+  animation: grain 1s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes grain {
+  0% {
+    background-position: 0 0;
+  }
+  10% {
+    background-position: -2% 1%;
+  }
+  20% {
+    background-position: 1% -1%;
+  }
+  30% {
+    background-position: -1% -2%;
+  }
+  40% {
+    background-position: 2% 1%;
+  }
+  50% {
+    background-position: -2% -1%;
+  }
+  60% {
+    background-position: 1% 2%;
+  }
+  70% {
+    background-position: -1% 1%;
+  }
+  80% {
+    background-position: 2% -2%;
+  }
+  90% {
+    background-position: -2% 0%;
+  }
+  100% {
+    background-position: 0 0;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  .grain-overlay {
+    animation: none;
+  }
 }
