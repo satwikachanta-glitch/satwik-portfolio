@@ -6,6 +6,7 @@ import Spotlight from "@/components/Spotlight";
 import CommandMenu from "@/components/CommandMenu";
 import MobileCommandTrigger from "@/components/MobileCommandTrigger";
 import ShortcutHint from "@/components/ShortcutHint";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,6 +42,7 @@ export default function RootLayout({
       <ShortcutHint />
       {/* Your page content */}
       {children}
+      <Analytics />
       </body>
     </html>
   );
